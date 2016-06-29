@@ -14,6 +14,7 @@ class MenuController
 		puts "3 - Search for an entry"
 		puts "4 - Import entries from a CSV"
 		puts "5 - Exit"
+		puts "6 - View Entry Number n"
 		print "Enter your selection: "
 
 		selection = gets.to_i
@@ -38,6 +39,10 @@ class MenuController
 			when 5
 				puts "Good-bye!"
 				exit(0)
+			when 6
+				system "clear"
+				view_entry
+				main_menu
 			else
 				system "clear"
 				puts "Sorry, that is not a valid input"
@@ -104,6 +109,24 @@ class MenuController
 				entry_submenu(entry)
 		end
 
+	end
+
+	def view_entry
+		system "clear"
+		print "Entry number to view (0 is the first record):"
+
+		selection = gets.to_i
+		selection -= 1
+		
+		if selection.is_a?(Integer)
+			if !address_book.entries[selection]
+				puts "No record exists for entry number #{selection}"
+			else
+				puts address_book.entries[selection].to_s
+			end
+		else
+			puts "#{selection} is not a number"
+		end
 	end
 
 end
