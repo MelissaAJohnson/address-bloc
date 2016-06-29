@@ -112,21 +112,15 @@ class MenuController
 	end
 
 	def view_entry
-		system "clear"
-		print "Entry number to view (0 is the first record):"
-
-		selection = gets.to_i
-		selection -= 1
-		
-		if selection.is_a?(Integer)
-			if !address_book.entries[selection]
-				puts "No record exists for entry number #{selection}"
-			else
-				puts address_book.entries[selection].to_s
-			end
-		else
-			puts "#{selection} is not a number"
-		end
+	    puts "Which entry number? "
+	    n = gets.chomp.to_i
+	    if @address_book.entries[n]
+	    	system "clear"
+	    	puts "Entry #{n} is:\n#{@address_book.entries[n]}\n\n"
+	    else
+	    	puts "#{n} is not a valid input"
+	    	view_entry
+	    end
 	end
 
 end
